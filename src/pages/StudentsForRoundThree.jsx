@@ -112,9 +112,7 @@ const StudentsForRoundThree = () => {
     navigate("/students-for-round-four");
   };
 
-  // StudentsForRoundThree component
   const handleDeleteStudent = (studentId) => {
-    // Remove the student from Round Three
     const updatedRoundThreeStudents = roundThreeStudents.filter(
       (student) => student.srno !== studentId
     );
@@ -126,8 +124,6 @@ const StudentsForRoundThree = () => {
       "roundThreeStudentIds",
       JSON.stringify(updatedRoundThreeStudentIds)
     );
-
-    // Remove the student from Round Four
     const updatedRoundFourStudentIds = roundFourStudentIds.filter(
       (id) => id !== studentId
     );
@@ -137,13 +133,6 @@ const StudentsForRoundThree = () => {
       JSON.stringify(updatedRoundFourStudentIds)
     );
   };
-
-  // const handleDeleteStudent = (studentId) => {
-  //   const updatedRoundThreeStudents = roundThreeStudents.filter(student => student.srno !== studentId);
-  //   setRoundThreeStudents(updatedRoundThreeStudents);
-  //   const updatedRoundThreeStudentIds = updatedRoundThreeStudents.map(student => student.srno);
-  //   localStorage.setItem('roundThreeStudentIds', JSON.stringify(updatedRoundThreeStudentIds));
-  // };
 
   const isAddedToRoundFour = (studentId) =>
     roundFourStudentIds.includes(studentId);
@@ -155,19 +144,19 @@ const StudentsForRoundThree = () => {
         <div>
           <Link
             to="/students-for-round-four"
-            className="bg-green-500 text-white py-2 px-4 ml-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-500"
           >
             Go to Round Four
           </Link>
           <button
             onClick={handleAddStudentsToRoundFour}
-            className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-red-400 text-white py-2 px-4 ml-4 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
           >
             Add Students for Round Four
           </button>
           <Link
             to="/students-for-round-two"
-            className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-gray-500 text-white py-2 px-4 ml-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             View Round Two Students
           </Link>
@@ -223,7 +212,7 @@ const StudentsForRoundThree = () => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   <button
                     onClick={() => handleDeleteStudent(student.srno)}
-                    className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     Delete
                   </button>

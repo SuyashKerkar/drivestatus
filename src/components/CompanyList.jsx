@@ -9,9 +9,10 @@ const CompanyList = () => {
     { id: 1, name: "Company A", year: 2023, timesVisited: 2 },
     { id: 2, name: "Company B", year: 2022, timesVisited: 3 },
     { id: 3, name: "Company C", year: 2021, timesVisited: 1 },
-    { id: 4, name: "Company A", year: 2024, timesVisited: 1 },
-    { id: 5, name: "Company B", year: 2018, timesVisited: 2 },
-    { id: 6, name: "Company D", year: 2020, timesVisited: 1 },
+    { id: 4, name: "Company A", year: 2020, timesVisited: 1 },
+    { id: 5, name: "Company D", year: 2020, timesVisited: 2 },
+    { id: 6, name: "Company B", year: 2018, timesVisited: 2 },
+    { id: 7, name: "Company D", year: 2020, timesVisited: 1 },
   ];
 
   const queryParams = new URLSearchParams(location.search);

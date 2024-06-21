@@ -160,7 +160,7 @@ const StudentsForRoundFour = () => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   <button
                     onClick={() => handleDeleteStudent(student.srno)}
-                    className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     Delete
                   </button>

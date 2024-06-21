@@ -124,7 +124,7 @@ const StudentsList = () => {
           {!showCheckboxColumn && (
             <button
               onClick={() => setShowCheckboxColumn(true)}
-              className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-red-400 text-white py-2 px-4 ml-4 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
             >
               Add Students for Round Two
             </button>
@@ -132,7 +132,7 @@ const StudentsList = () => {
           {showCheckboxColumn && (
             <button
               onClick={handleAddStudentsToRoundTwo}
-              className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-green-600 text-white py-2 px-4 ml-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600"
             >
               Confirm Add to Round Two
             </button>
