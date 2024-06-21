@@ -136,27 +136,26 @@ const StudentsForRoundThree = () => {
 
   const isAddedToRoundFour = (studentId) =>
     roundFourStudentIds.includes(studentId);
-
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 flex flex-wrap">
         <h1 className="text-2xl font-bold">Round Three Students</h1>
         <div>
           <Link
             to="/students-for-round-four"
-            className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="bg-blue-500 text-white py-2 px-4 ml-4 mb-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-500 inline-block"
           >
             Go to Round Four
           </Link>
           <button
             onClick={handleAddStudentsToRoundFour}
-            className="bg-red-400 text-white py-2 px-4 ml-4 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
+            className="bg-red-400 text-white py-2 px-4 ml-4 mb-4 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 inline-block"
           >
             Add Students for Round Four
           </button>
           <Link
             to="/students-for-round-two"
-            className="bg-gray-500 text-white py-2 px-4 ml-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="bg-gray-500 text-white py-2 px-4 ml-4 mb-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 inline-block"
           >
             View Round Two Students
           </Link>

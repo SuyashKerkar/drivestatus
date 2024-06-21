@@ -32,7 +32,7 @@ const TimesVisitedDropdown = () => {
   ];
 
   return (
-    <div>
+    <div className="m-3">
       <label
         htmlFor="timesVisited"
         className="block text-sm font-medium text-gray-700"

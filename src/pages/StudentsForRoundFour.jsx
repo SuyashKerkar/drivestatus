@@ -111,12 +111,12 @@ const StudentsForRoundFour = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 flex flex-wrap">
         <h1 className="text-2xl font-bold">Round Four Students</h1>
         <div>
           <button
             onClick={handleGoBackToRoundThree}
-            className="bg-gray-500 text-white py-2 px-4 ml-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="bg-gray-500 text-white py-2 px-4 ml-4 mb-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             Go Back to Round Three Students
           </button>

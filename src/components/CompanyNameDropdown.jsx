@@ -30,7 +30,7 @@ const CompanyNameDropdown = () => {
   ];
 
   return (
-    <div>
+    <div className="m-3">
       <label
         htmlFor="companyName"
         className="block text-sm font-medium text-gray-700"

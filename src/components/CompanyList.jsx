@@ -1,4 +1,7 @@
 import React from "react";
+import CompanyNameDropdown from "./CompanyNameDropdown";
+import YearDropdown from "./YearDropdown";
+import TimesVisitedDropdown from "./TimesVisitedDropdown";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const CompanyList = () => {
@@ -38,40 +41,47 @@ const CompanyList = () => {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white">
-        <thead>
-          <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-            <th className="py-3 px-6 text-left">Company Name</th>
-            <th className="py-3 px-6 text-left">Year</th>
-            <th className="py-3 px-6 text-left">Times Visited</th>
-            <th className="py-3 px-6 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-600 text-sm font-light">
-          {filteredCompanies.map((company) => (
-            <tr key={company.id}>
-              <td className="py-3 px-6 text-left whitespace-nowrap">
-                {company.name}
-              </td>
-              <td className="py-3 px-6 text-left whitespace-nowrap">
-                {company.year}
-              </td>
-              <td className="py-3 px-6 text-left whitespace-nowrap">
-                {company.timesVisited}
-              </td>
-              <td className="py-3 px-6 text-left whitespace-nowrap">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleShowStudents(company)}
-                >
-                  Show Registered Students
-                </button>
-              </td>
+    <div className="">
+      <div className="flex flex-wrap">
+        <CompanyNameDropdown />
+        <YearDropdown />
+        <TimesVisitedDropdown />
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+              <th className="py-3 px-6 text-left">Company Name</th>
+              <th className="py-3 px-6 text-left">Year</th>
+              <th className="py-3 px-6 text-left">Times Visited</th>
+              <th className="py-3 px-6 text-left">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="text-gray-600 text-sm font-light">
+            {filteredCompanies.map((company) => (
+              <tr key={company.id}>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {company.name}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {company.year}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {company.timesVisited}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleShowStudents(company)}
+                  >
+                    Show Registered Students
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

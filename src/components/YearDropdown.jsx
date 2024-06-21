@@ -34,7 +34,7 @@ const YearDropdown = () => {
   ];
 
   return (
-    <div>
+    <div className="m-3">
       <label htmlFor="year" className="block text-sm font-medium text-gray-700">
         Year
       </label>
