@@ -6,7 +6,8 @@ import TimesVisitedDropdown from './components/TimesVistedDropdown';
 import CompanyList from './components/CompanyList';
 import StudentsList from './pages/StudentsList';
 import StudentsForRoundTwo from './pages/StudentsForRoundTwo';
-import StudentsForRoundThree from './pages/StudentsForRoundThree'; // Import the new component
+import StudentsForRoundThree from './pages/StudentsForRoundThree';
+import StudentsForRoundFour from './pages/StudentsForRoundFour'; // Import the new component
 
 const App = () => {
   return (
@@ -23,7 +24,8 @@ const App = () => {
           <Route path="/" element={<CompanyList />} />
           <Route path="/students" element={<StudentsList />} />
           <Route path="/students-for-round-two" element={<StudentsForRoundTwo />} />
-          <Route path="/students-for-round-three" element={<StudentsForRoundThree />} /> {/* Add new route */}
+          <Route path="/students-for-round-three" element={<StudentsForRoundThree />} /> 
+          <Route path="/students-for-round-four" element={<StudentsForRoundFour />} />{/* Add new route */}
         </Routes>
       </div>
     </Router>

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StudentsForRoundThree = () => {
   const [roundThreeStudents, setRoundThreeStudents] = useState([]);
+  const [selectedStudentIds, setSelectedStudentIds] = useState([]);
+  const [roundFourStudentIds, setRoundFourStudentIds] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedRoundThreeStudentIds = JSON.parse(localStorage.getItem('roundThreeStudentIds')) || [];
+    const storedRoundFourStudentIds = JSON.parse(localStorage.getItem('roundFourStudentIds')) || [];
     const storedStudents = [
       { srno: 1, tpoid: 'TPO123', name: 'John Doe', collegeid: 'C001', branch: 'CSE', mobile: '1234567890' },
       { srno: 2, tpoid: 'TPO124', name: 'Jane Smith', collegeid: 'C002', branch: 'ECE', mobile: '0987654321' },
@@ -17,12 +22,61 @@ const StudentsForRoundThree = () => {
     ];
     const filteredStudents = storedStudents.filter(student => storedRoundThreeStudentIds.includes(student.srno));
     setRoundThreeStudents(filteredStudents);
+    setRoundFourStudentIds(storedRoundFourStudentIds);
   }, []);
+
+  const handleCheckboxChange = (studentId) => {
+    if (selectedStudentIds.includes(studentId)) {
+      setSelectedStudentIds(selectedStudentIds.filter(id => id !== studentId));
+    } else {
+      setSelectedStudentIds([...selectedStudentIds, studentId]);
+    }
+  };
+
+  const handleAddStudentsToRoundFour = () => {
+    const newRoundFourStudentIds = [...roundFourStudentIds, ...selectedStudentIds];
+    setRoundFourStudentIds(newRoundFourStudentIds);
+    localStorage.setItem('roundFourStudentIds', JSON.stringify(newRoundFourStudentIds));
+    setSelectedStudentIds([]);
+  };
+
+  const handleGoToRoundFour = () => {
+    navigate('/students-for-round-four');
+  };
+
+  const handleDeleteStudent = (studentId) => {
+    const updatedRoundThreeStudents = roundThreeStudents.filter(student => student.srno !== studentId);
+    setRoundThreeStudents(updatedRoundThreeStudents);
+    const updatedRoundThreeStudentIds = updatedRoundThreeStudents.map(student => student.srno);
+    localStorage.setItem('roundThreeStudentIds', JSON.stringify(updatedRoundThreeStudentIds));
+  };
+
+  const isAddedToRoundFour = (studentId) => roundFourStudentIds.includes(studentId);
 
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Round Three Students</h1>
+        <div>
+          <Link
+            to="/students-for-round-four"
+            className="bg-green-500 text-white py-2 px-4 ml-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            Go to Round Four
+          </Link>
+          <button
+            onClick={handleAddStudentsToRoundFour}
+            className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Add Students for Round Four
+          </button>
+          <Link
+            to="/students-for-round-two"
+            className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            View Round Two Students
+          </Link>
+        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -35,6 +89,8 @@ const StudentsForRoundThree = () => {
               <th className="py-3 px-6 text-left">College ID</th>
               <th className="py-3 px-6 text-left">Branch</th>
               <th className="py-3 px-6 text-left">Mobile</th>
+              <th className="py-3 px-6 text-left">Select for Round Four</th>
+              <th className="py-3 px-6 text-left">Actions</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
@@ -46,6 +102,25 @@ const StudentsForRoundThree = () => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">{student.collegeid}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">{student.branch}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">{student.mobile}</td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {isAddedToRoundFour(student.srno) ? (
+                    <span>Added to Round Four</span>
+                  ) : (
+                    <input
+                      type="checkbox"
+                      checked={selectedStudentIds.includes(student.srno)}
+                      onChange={() => handleCheckboxChange(student.srno)}
+                    />
+                  )}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  <button
+                    onClick={() => handleDeleteStudent(student.srno)}
+                    className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
