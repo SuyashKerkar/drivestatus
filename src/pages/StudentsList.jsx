@@ -18,10 +18,13 @@ const StudentsList = () => {
 
   const [selectedStudentIds, setSelectedStudentIds] = useState([]);
   const [roundTwoStudentIds, setRoundTwoStudentIds] = useState([]);
+  const [roundThreeStudentIds, setRoundThreeStudentIds] = useState([]);
 
   useEffect(() => {
     const storedRoundTwoStudentIds = JSON.parse(localStorage.getItem('roundTwoStudentIds')) || [];
+    const storedRoundThreeStudentIds = JSON.parse(localStorage.getItem('roundThreeStudentIds')) || [];
     setRoundTwoStudentIds(storedRoundTwoStudentIds);
+    setRoundThreeStudentIds(storedRoundThreeStudentIds);
   }, []);
 
   const handleCheckboxChange = (studentId) => {
@@ -32,7 +35,7 @@ const StudentsList = () => {
     }
   };
 
-  const handleAddStudents = () => {
+  const handleAddStudentsToRoundTwo = () => {
     const newRoundTwoStudentIds = [...roundTwoStudentIds, ...selectedStudentIds];
     setRoundTwoStudentIds(newRoundTwoStudentIds);
     localStorage.setItem('roundTwoStudentIds', JSON.stringify(newRoundTwoStudentIds));
@@ -51,7 +54,7 @@ const StudentsList = () => {
             View Round Two Students
           </Link>
           <button
-            onClick={handleAddStudents}
+            onClick={handleAddStudentsToRoundTwo}
             className="bg-blue-500 text-white py-2 px-4 ml-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Add Students for Round Two
