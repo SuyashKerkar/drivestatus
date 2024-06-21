@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const StudentsForRoundThree = () => {
   const [roundThreeStudents, setRoundThreeStudents] = useState([]);
@@ -8,50 +8,145 @@ const StudentsForRoundThree = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedRoundThreeStudentIds = JSON.parse(localStorage.getItem('roundThreeStudentIds')) || [];
-    const storedRoundFourStudentIds = JSON.parse(localStorage.getItem('roundFourStudentIds')) || [];
+    const storedRoundThreeStudentIds =
+      JSON.parse(localStorage.getItem("roundThreeStudentIds")) || [];
+    const storedRoundFourStudentIds =
+      JSON.parse(localStorage.getItem("roundFourStudentIds")) || [];
     const storedStudents = [
-      { srno: 1, tpoid: 'TPO123', name: 'John Doe', collegeid: 'C001', branch: 'CSE', mobile: '1234567890' },
-      { srno: 2, tpoid: 'TPO124', name: 'Jane Smith', collegeid: 'C002', branch: 'ECE', mobile: '0987654321' },
-      { srno: 3, tpoid: 'TPO125', name: 'Mike Johnson', collegeid: 'C001', branch: 'CSE', mobile: '1112223334' },
-      { srno: 4, tpoid: 'TPO126', name: 'Emily Davis', collegeid: 'C001', branch: 'CSE', mobile: '2223334445' },
-      { srno: 5, tpoid: 'TPO127', name: 'Dale Styne', collegeid: 'C002', branch: 'ECE', mobile: '3334445556' },
-      { srno: 6, tpoid: 'TPO128', name: 'Danish Kumar', collegeid: 'C001', branch: 'CSE', mobile: '4445556667' },
-      { srno: 7, tpoid: 'TPO129', name: 'Sardar Paji', collegeid: 'C001', branch: 'CSE', mobile: '5556667778' },
-      { srno: 8, tpoid: 'TPO130', name: 'Kolam Kumar', collegeid: 'C001', branch: 'CSE', mobile: '6667778889' },
+      {
+        srno: 1,
+        tpoid: "TPO123",
+        name: "John Doe",
+        collegeid: "C001",
+        branch: "CSE",
+        mobile: "1234567890",
+      },
+      {
+        srno: 2,
+        tpoid: "TPO124",
+        name: "Jane Smith",
+        collegeid: "C002",
+        branch: "ECE",
+        mobile: "0987654321",
+      },
+      {
+        srno: 3,
+        tpoid: "TPO125",
+        name: "Mike Johnson",
+        collegeid: "C001",
+        branch: "CSE",
+        mobile: "1112223334",
+      },
+      {
+        srno: 4,
+        tpoid: "TPO126",
+        name: "Emily Davis",
+        collegeid: "C001",
+        branch: "CSE",
+        mobile: "2223334445",
+      },
+      {
+        srno: 5,
+        tpoid: "TPO127",
+        name: "Dale Styne",
+        collegeid: "C002",
+        branch: "ECE",
+        mobile: "3334445556",
+      },
+      {
+        srno: 6,
+        tpoid: "TPO128",
+        name: "Danish Kumar",
+        collegeid: "C001",
+        branch: "CSE",
+        mobile: "4445556667",
+      },
+      {
+        srno: 7,
+        tpoid: "TPO129",
+        name: "Sardar Paji",
+        collegeid: "C001",
+        branch: "CSE",
+        mobile: "5556667778",
+      },
+      {
+        srno: 8,
+        tpoid: "TPO130",
+        name: "Kolam Kumar",
+        collegeid: "C001",
+        branch: "CSE",
+        mobile: "6667778889",
+      },
     ];
-    const filteredStudents = storedStudents.filter(student => storedRoundThreeStudentIds.includes(student.srno));
+    const filteredStudents = storedStudents.filter((student) =>
+      storedRoundThreeStudentIds.includes(student.srno)
+    );
     setRoundThreeStudents(filteredStudents);
     setRoundFourStudentIds(storedRoundFourStudentIds);
   }, []);
 
   const handleCheckboxChange = (studentId) => {
     if (selectedStudentIds.includes(studentId)) {
-      setSelectedStudentIds(selectedStudentIds.filter(id => id !== studentId));
+      setSelectedStudentIds(
+        selectedStudentIds.filter((id) => id !== studentId)
+      );
     } else {
       setSelectedStudentIds([...selectedStudentIds, studentId]);
     }
   };
 
   const handleAddStudentsToRoundFour = () => {
-    const newRoundFourStudentIds = [...roundFourStudentIds, ...selectedStudentIds];
+    const newRoundFourStudentIds = [
+      ...roundFourStudentIds,
+      ...selectedStudentIds,
+    ];
     setRoundFourStudentIds(newRoundFourStudentIds);
-    localStorage.setItem('roundFourStudentIds', JSON.stringify(newRoundFourStudentIds));
+    localStorage.setItem(
+      "roundFourStudentIds",
+      JSON.stringify(newRoundFourStudentIds)
+    );
     setSelectedStudentIds([]);
   };
 
   const handleGoToRoundFour = () => {
-    navigate('/students-for-round-four');
+    navigate("/students-for-round-four");
   };
 
+  // StudentsForRoundThree component
   const handleDeleteStudent = (studentId) => {
-    const updatedRoundThreeStudents = roundThreeStudents.filter(student => student.srno !== studentId);
+    // Remove the student from Round Three
+    const updatedRoundThreeStudents = roundThreeStudents.filter(
+      (student) => student.srno !== studentId
+    );
     setRoundThreeStudents(updatedRoundThreeStudents);
-    const updatedRoundThreeStudentIds = updatedRoundThreeStudents.map(student => student.srno);
-    localStorage.setItem('roundThreeStudentIds', JSON.stringify(updatedRoundThreeStudentIds));
+    const updatedRoundThreeStudentIds = updatedRoundThreeStudents.map(
+      (student) => student.srno
+    );
+    localStorage.setItem(
+      "roundThreeStudentIds",
+      JSON.stringify(updatedRoundThreeStudentIds)
+    );
+
+    // Remove the student from Round Four
+    const updatedRoundFourStudentIds = roundFourStudentIds.filter(
+      (id) => id !== studentId
+    );
+    setRoundFourStudentIds(updatedRoundFourStudentIds);
+    localStorage.setItem(
+      "roundFourStudentIds",
+      JSON.stringify(updatedRoundFourStudentIds)
+    );
   };
 
-  const isAddedToRoundFour = (studentId) => roundFourStudentIds.includes(studentId);
+  // const handleDeleteStudent = (studentId) => {
+  //   const updatedRoundThreeStudents = roundThreeStudents.filter(student => student.srno !== studentId);
+  //   setRoundThreeStudents(updatedRoundThreeStudents);
+  //   const updatedRoundThreeStudentIds = updatedRoundThreeStudents.map(student => student.srno);
+  //   localStorage.setItem('roundThreeStudentIds', JSON.stringify(updatedRoundThreeStudentIds));
+  // };
+
+  const isAddedToRoundFour = (studentId) =>
+    roundFourStudentIds.includes(studentId);
 
   return (
     <div className="container mx-auto p-4">
@@ -96,12 +191,24 @@ const StudentsForRoundThree = () => {
           <tbody className="text-gray-600 text-sm font-light">
             {roundThreeStudents.map((student) => (
               <tr key={student.srno}>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{student.srno}</td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{student.tpoid}</td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{student.name}</td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{student.collegeid}</td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{student.branch}</td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{student.mobile}</td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {student.srno}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {student.tpoid}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {student.name}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {student.collegeid}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {student.branch}
+                </td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {student.mobile}
+                </td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   {isAddedToRoundFour(student.srno) ? (
                     <span>Added to Round Four</span>
