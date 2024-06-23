@@ -7,7 +7,9 @@ import CompanyList from "./components/CompanyList";
 import StudentsList from "./pages/StudentsList";
 import StudentsForRoundTwo from "./pages/StudentsForRoundTwo";
 import StudentsForRoundThree from "./pages/StudentsForRoundThree";
-import StudentsForRoundFour from "./pages/StudentsForRoundFour"; // Import the new component
+import StudentsForRoundFour from "./pages/StudentsForRoundFour";
+import PlacedStudents from "./pages/PlacedStudents";
+// Import the new component
 
 const App = () => {
   return (
@@ -35,6 +37,9 @@ const App = () => {
             path="/students-for-round-four"
             element={<StudentsForRoundFour />}
           />
+          <Route
+           path="/placed-students" 
+           element={<PlacedStudents />} />
           {/* Add new route */}
         </Routes>
       </div>

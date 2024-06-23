@@ -6,6 +6,7 @@ const StudentsForRoundTwo = () => {
   const [selectedStudentIds, setSelectedStudentIds] = useState([]);
   const [roundThreeStudentIds, setRoundThreeStudentIds] = useState([]);
   const [roundFourStudentIds, setRoundFourStudentIds] = useState([]);
+  const [placedStudentIds, setPlacedStudentIds] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +16,8 @@ const StudentsForRoundTwo = () => {
       JSON.parse(localStorage.getItem("roundThreeStudentIds")) || [];
     const storedRoundFourStudentIds =
       JSON.parse(localStorage.getItem("roundFourStudentIds")) || [];
+    const storedPlacedStudentIds =
+      JSON.parse(localStorage.getItem("placedStudentIds")) || [];
     const storedStudents = [
       {
         srno: 1,
@@ -88,6 +91,7 @@ const StudentsForRoundTwo = () => {
     setRoundTwoStudents(filteredStudents);
     setRoundThreeStudentIds(storedRoundThreeStudentIds);
     setRoundFourStudentIds(storedRoundFourStudentIds);
+    setPlacedStudentIds(storedPlacedStudentIds);
   }, []);
 
   const handleCheckboxChange = (studentId) => {
@@ -111,6 +115,27 @@ const StudentsForRoundTwo = () => {
       JSON.stringify(newRoundThreeStudentIds)
     );
     setSelectedStudentIds([]);
+  };
+
+  const handleAddToPlaced = (studentId) => {
+    const newPlacedStudentIds = [...placedStudentIds, studentId];
+    setPlacedStudentIds(newPlacedStudentIds);
+    localStorage.setItem(
+      "placedStudentIds",
+      JSON.stringify(newPlacedStudentIds)
+    );
+    alert("Added to placed students");
+  };
+
+  const handleDeleteFromPlaced = (studentId) => {
+    const updatedPlacedStudentIds = placedStudentIds.filter(
+      (id) => id !== studentId
+    );
+    setPlacedStudentIds(updatedPlacedStudentIds);
+    localStorage.setItem(
+      "placedStudentIds",
+      JSON.stringify(updatedPlacedStudentIds)
+    );
   };
 
   const handleGoBack = () => {
@@ -145,7 +170,9 @@ const StudentsForRoundTwo = () => {
       "roundFourStudentIds",
       JSON.stringify(updatedRoundFourStudentIds)
     );
+    // Do not remove from placedStudentIds here
   };
+
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4 flex flex-wrap">
@@ -209,7 +236,13 @@ const StudentsForRoundTwo = () => {
                 </td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   {roundThreeStudentIds.includes(student.srno) ? (
-                    <span>Added to Round Three</span>
+                    <span className="text-green-600 font-semibold">
+                      Added to Round Three
+                    </span>
+                  ) : placedStudentIds.includes(student.srno) ? (
+                    <span className="text-blue-600 font-semibold">
+                      Added to Placed
+                    </span>
                   ) : (
                     <input
                       type="checkbox"
@@ -219,12 +252,36 @@ const StudentsForRoundTwo = () => {
                   )}
                 </td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  <button
-                    onClick={() => handleDeleteStudent(student.srno)}
-                    className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
-                  >
-                    Delete
-                  </button>
+                  {roundThreeStudentIds.includes(student.srno) ? (
+                    <button
+                      onClick={() => handleDeleteStudent(student.srno)}
+                      className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
+                    >
+                      Delete
+                    </button>
+                  ) : placedStudentIds.includes(student.srno) ? (
+                    <button
+                      onClick={() => handleDeleteFromPlaced(student.srno)}
+                      className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
+                    >
+                      Remove from Placed
+                    </button>
+                  ) : (
+                    <React.Fragment>
+                      <button
+                        onClick={() => handleAddToPlaced(student.srno)}
+                        className="bg-green-400 text-white py-1 px-2 rounded hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+                      >
+                        Add to Placed
+                      </button>
+                      <button
+                        onClick={() => handleDeleteStudent(student.srno)}
+                        className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 ml-2"
+                      >
+                        Delete
+                      </button>
+                    </React.Fragment>
+                  )}
                 </td>
               </tr>
             ))}
